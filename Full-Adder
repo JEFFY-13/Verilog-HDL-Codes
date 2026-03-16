@@ -1,0 +1,6 @@
+module FA(a,b,c,s,car); 
+  input a,b,c; 
+  output car,s; 
+  assign car=a^b^c; 
+  assign s=(a&b)|(b&c)|(a&c); 
+endmodule 
