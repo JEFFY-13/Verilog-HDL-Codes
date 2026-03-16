@@ -1,0 +1,6 @@
+module FS(a,b,c,s,diff); 
+ input a,b,c; 
+ output diff,s; 
+ assign diff=a^b^c; 
+ assign s=((~a)&b)|((~(a^b))&c); 
+endmodule 
