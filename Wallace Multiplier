@@ -1,0 +1,54 @@
+module walla(a, b, y, co); 
+  input [3:0] a; 
+  input [3:0] b; 
+  output [6:0] y; 
+  output co; 
+  wire [15:0] p; 
+  wire [10:0] c; 
+  wire [7:0] s; 
+  assign p[0]=a[0]&b[0]; 
+  and AND1(p[1],a[0],b[1]); 
+  and AND2(p[2],a[0],b[2]); 
+  and AND3(p[3],a[0],b[3]); 
+  and AND4(p[4],a[1],b[0]); 
+  and AND5(p[5],a[1],b[1]); 
+  and AND6(p[6],a[1],b[2]); 
+  and AND7(p[7],a[1],b[3]); 
+  and AND8(p[8],a[2],b[0]); 
+  and AND9(p[9],a[2],b[1]); 
+  and AND10(p[10],a[2],b[2]); 
+  and AND11(p[11],a[2],b[3]); 
+  and AND12(p[12],a[3],b[0]); 
+  and AND13(p[13],a[3],b[1]); 
+  and AND14(p[14],a[3],b[2]); 
+  and AND15(p[15],a[3],b[3]); 
+  HA a1(p[1], p[2], s[0], c[0]); 
+  FA a2(p[3], p[4], p[5], s[1], c[1]); 
+  FA a3(p[7], p[8], p[9], s[2], c[2]); 
+  HA a4(p[11], p[12], s[3], c[3]); 
+  HA a5(c[0], s[1], s[4], c[4]); 
+  FA a6(c[1], p[6], s[2], s[5], c[5]); 
+  FA a7(c[2], p[10], s[3], s[6], c[6]); 
+  FA a8(c[3], p[13], p[14], s[7], c[7]); 
+  HA a9(c[4], s[5], y[3], c[8]); 
+  FA a10(c[8], c[5], s[6], y[4], c[9]); 
+  FA a11(c[9], c[6], s[7], y[5], c[10]); 
+  FA a12(c[10], c[7], p[15], y[6], co); 
+  assign y[0] = p[0]; 
+  assign y[1] = s[0]; 
+  assign y[2] = s[4]; 
+endmodule 
+
+module HA(a,b,c,sum); 
+ input a,b; 
+ output c,sum; 
+ assign c=a&b; 
+ assign sum=a^b; 
+endmodule
+
+module FA(a,b,c,s,car); 
+  input a,b,c; 
+  output car,s; 
+  assign car=a^b^c; 
+  assign s=(a&b)|(b&c)|(a&c); 
+endmodule
