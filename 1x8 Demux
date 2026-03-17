@@ -1,0 +1,18 @@
+module demux(d,s0,s1,s2,y0,y1,y2,y3,y4,y5,y6,y7); 
+  input d,s0,s1,s2; 
+  output y0,y1,y2,y3,y4,y5,y6,y7; 
+  and3g a1(d,(~s0),(~s1),(~s2),y0); 
+  and3g a2(d,(~s0),(~s1),(s2),y1); 
+  and3g a3(d,(~s0),(s1),(~s2),y2); 
+  and3g a4(d,(~s0),(s1),(s2),y3); 
+  and3g a5(d,(s0),(~s1),(~s2),y4); 
+  and3g a6(d,(s0),(~s1),(s2),y5); 
+  and3g a7(d,(s0),(s1),(~s2),y6); 
+  and3g a8(d,(s0),(s1),(s2),y7); 
+endmodule 
+
+module and3g(a,b,c,d,y); 
+  input a,b,c,d; 
+  output y; 
+  assign y=(a&b&c&d); 
+endmodule 
