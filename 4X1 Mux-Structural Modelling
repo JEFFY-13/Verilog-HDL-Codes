@@ -1,0 +1,16 @@
+module mux3(d0,d1,d2,d3,s0,s1,y); 
+  input d0,d1,d2,d3,s0,s1; 
+  output y; 
+  wire and1,and2,and3,and4; 
+  and AND1 (and1, d0, ~s1, ~s0); 
+  and AND2 (and2, d1, ~s1, s0); 
+  and AND3 (and3, d2, s1, ~s0); 
+  and AND4 (and4, d3, s1, s0); 
+  assign y = and1|and2|and3|and4; 
+endmodule 
+
+module andg(a,b,c); 
+  input a,b; 
+  output c; 
+  assign c=a&b; 
+endmodule
