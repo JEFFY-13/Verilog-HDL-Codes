@@ -1,0 +1,52 @@
+module SRff(clr,clk,s,r,q,qb);
+  input clr,clk,s,r;
+  output reg q,qb;
+  wire x;
+  divclk dd (clk,clr,x);
+  always@(posedge x)
+  begin
+    if(clr==1)
+      begin
+      q=0;
+      qb=1;
+      end
+    else if(s==0&& r==0)
+      begin
+        q=q;
+        qb=~q;
+      end
+    else if(s==0&&r==1)
+      begin
+        q=0;
+        qb=1;
+      end
+    else if(s==1&&r==0)
+      begin
+        q=1;
+        qb=0;
+      end
+    else if(s==1 &&r==1)
+      begin
+        q=1;
+        qb=1;
+      end
+  end
+endmodule
+
+module divclk(clk,rst,q);
+    input clk,rst;
+   output reg q;
+   reg [27:0]sig;
+  assign LED=q;
+   always@(posedge clk)
+    begin
+     if(rst==1)begin
+        sig=28'b0;
+      end
+   else
+      begin
+        sig=sig+1;
+    end
+      q=sig[26];
+	  end 
+ endmodule
