@@ -1,0 +1,49 @@
+module JK(cl,clk,j,k,q,qo);
+  input cl,clk,j,k;
+  output reg q,qo;
+  always@(posedge clk)
+  begin
+    if(cl==1)
+      begin
+      q=0;
+      qo=1;
+      end
+    else if(j==0&&k==0)
+      begin
+        q=q;
+        qo=~q;
+      end
+    else if(j==0&&k==1)
+      begin
+        q=0;
+        qo=1;
+      end
+    else if(j==1&&k==0)
+      begin
+        q=1;
+        qo=0;
+      end
+    else if(j==1 &&k==1)
+      begin
+        q=~q;
+        qo=~qo;
+      end
+  end
+endmodule
+module divclk(clk,rst,q);
+    input clk,rst;
+   output reg q;
+   reg [27:0]sig;
+  assign LED=q;
+   always@(posedge clk)
+    begin
+     if(rst==1)begin
+        sig=28'b0;
+      end
+   else
+      begin
+        sig=sig+1;
+    end
+      q=sig[26];
+	  end 
+ endmodule
